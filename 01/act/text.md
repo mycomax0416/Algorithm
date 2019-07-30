@@ -59,7 +59,7 @@ code+static, stack, heap
 
 
 
-포인트 어레이
+포인트 어레이(array)
 
 
 
