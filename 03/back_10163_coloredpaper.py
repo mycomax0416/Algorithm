@@ -2,7 +2,7 @@ import sys
 sys.stdin = open('back_10163_sample.txt', 'r')
 
 N = int(input())
-background_list = [[0] * 100 for _ in range(100)]
+background_list = [[0] * 100 for a in range(100)]
 
 for turn in range(N):
 

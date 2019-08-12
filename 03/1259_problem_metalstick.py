@@ -6,13 +6,13 @@ T = int(input())
 for i in range(T):
     x = int(input())
     old_arr = list(map(int, input().split()))
-
+   
     new_arr = []
     result = []
 
     for j in range(len(old_arr) // 2):
         new_arr.append([old_arr.pop(0), old_arr.pop(0)])
-
+  
     standard = new_arr[0]
     result += [new_arr[0].copy()]
 
