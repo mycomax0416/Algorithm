@@ -5,38 +5,26 @@ T = int(input())
 
 for i in range(T):
     N = int(input())
-    standard = [0] * 400
-    arr = []
+    empty = [0] * 400
+    result = 0
     
-    for j in range(N):
-        arr += [list(map(int, input().split()))]
-
-    for l in range(len(arr)):
-        if arr[l][0] % 2 == 0:
-            arr[l][0] -= 1
+    for _ in range(N):
+        first, last = map(int, input().split())
         
-        if arr[l][1] % 2 == 1:
-            arr[l][1] += 1
-    
-    arr += ['point']
-    count = 0
+        if first > last:
+            first, last = last, first
 
-    while arr != ['point']:
-        compare = arr.pop(0)
-        if compare == 'point':
-            count += 1
-            arr += ['point']
-            standard = [0] * 401
+        if first % 2 == 0:
+            first -= 1
+        
+        if last % 2 == 1:
+            last += 1
 
-        elif standard[compare[0]] == 0 and standard[compare[1]] == 0:
-            for k in range(compare[0], compare[1]):
-                standard[k] = 1
+        for point in range(first, last):
+            empty[point] += 1
 
-        else:
-            arr += [compare]
-        print(compare)
-        print(arr)
-        print(standard)
-    
-    count += 1
-    print('#{} {}'.format(i+1, count))
+    for idx in empty:
+        if idx > result:
+            result = idx
+
+    print('#{} {}'.format(i+1, result))
