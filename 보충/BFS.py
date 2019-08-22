@@ -35,8 +35,8 @@ def BFS(s):     # s: 시작점
                 P[w] = v
                 Q.append(w)
     
-    print(P)
-    print(D)
+    # print(D)
+    # print(P)
 
 
 #------------------------------------------------------
