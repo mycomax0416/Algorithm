@@ -3,7 +3,7 @@ sys.stdin = open('BOJ_1260_input.txt', 'r')
 from collections import deque
 
 T = int(input())
-for a in range(3):
+for a in range(T):
     N, M, V = (map(int, input().split()))
     
     # print(N, M, V)
