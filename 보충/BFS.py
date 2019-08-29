@@ -27,6 +27,8 @@ def BFS(s):     # s: 시작점
     visit[s] = True; print(s, end=' ')
     Q.append(s)
     while Q: # 빈 큐가 아닐 동안
+        print(Q)
+        print(visit)
         v = Q.popleft()
         for w in G[v]:
             if not visit[w]:
