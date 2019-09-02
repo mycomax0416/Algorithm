@@ -12,6 +12,7 @@ def DFS(x, y):
     while stack:
         x, y = stack[-1][0], stack[-1][1]
         pre_x, pre_y = x, y
+
         for d in range(4):
             nx = dx[d] + x
             ny = dy[d] + y
