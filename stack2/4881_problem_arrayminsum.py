@@ -17,16 +17,16 @@ def perm(k, n, used, cursum):
 
 
 T = int(input())
-for test_case in range(1, T + 1):
+for t in range(T):
     N = int(input())
     arr = []
-    for i in range(N):
+    for n in range(N):
         arr.append(list(map(int, input().split())))
 
     MIN = 0xffffff
     perm(0, N, 0, 0)
 
-    print("#%d %d" % (test_case, MIN))
+    print("#{} {}".format(t+1, MIN))
 
 
 #-----------------------------------
