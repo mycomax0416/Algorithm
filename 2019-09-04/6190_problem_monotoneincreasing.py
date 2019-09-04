@@ -22,24 +22,23 @@ for t in range(T):
 
     choice = ['']*2
     result = []
-    ans = []
+    ans = -1
 
     backtrack(0, 0)
-    print(result)
     result.sort()
 
-    for test in result:
-        num = str(test)
-        sign = True
+    while result:
+        num = result.pop()
+        num = str(num)
+        sign = False
 
         for idx in range(len(num)-1):
-            if num[idx] > num[idx+1]:
-                sign = False
-
+            if num[0] != num[len(num)-1] and num[idx] < num[idx+1]:
+                ans = num
+                sign = True
+                break
+        
         if sign == True:
-            ans.append(test)
-    
-    if ans == []:
-        ans = -1
+            break
 
-    print('#{} {}'.format(t+1, max(ans)))
+    print('#{} {}'.format(t+1, ans))

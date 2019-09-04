@@ -51,7 +51,7 @@ def game(x, y, color):
                         if abs(tx) == abs(ty):
                             arr[ty][tx] = color
 
-    return
+    return arr
 
 T = int(input())
 for t in range(T):
@@ -65,7 +65,8 @@ for t in range(T):
 
     for m in range(M):
         x, y, color = map(int, input().split())
-        game(x, y, color)
+        # game(x, y, color)
+        print(game(x, y, color))
 
     white = 0
     black = 0
