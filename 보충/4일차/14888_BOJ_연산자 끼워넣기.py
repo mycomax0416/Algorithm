@@ -10,14 +10,17 @@ def backtrack(pl, mi, mu, di, k, cal):
 
     if pl > 0:
         cal += nums[k]
+        print(pl, mi, mu, di, k, cal)
         backtrack(pl-1, mi, mu, di, k+1, cal)
 
     if mi > 0:
         cal -= nums[k]
+        print(pl, mi, mu, di, k, cal)
         backtrack(pl, mi-1, mu, di, k+1, cal)
 
     if mu > 0:
         cal *= nums[k]
+        print(pl, mi, mu, di, k, cal)
         backtrack(pl, mi, mu-1, di, k+1, cal)
 
     if di > 0:
@@ -29,6 +32,7 @@ def backtrack(pl, mi, mu, di, k, cal):
         #     cal //= nums[k]
         cal //= nums[k]
 
+        print(pl, mi, mu, di, k, cal)
         backtrack(pl, mi, mu, di-1, k+1, cal)
 
 T = int(input())

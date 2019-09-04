@@ -8,7 +8,7 @@ def backtrack(n, cost):
         return
 
     if arr[n] == 0:
-        backtrack(n+1, cost)
+        backtrack(n + 1, cost)
 
     else:
         backtrack(n + 1, cost + day * arr[n])
