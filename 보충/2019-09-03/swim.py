@@ -69,7 +69,6 @@ T = int(input())
 for tc in range(1, T + 1):
     day, month, quarter, year = map(int, input().split())
     arr = [0] + list(map(int, input().split()))
-    # print(arr)
 
     ans = year
 
