@@ -4,8 +4,10 @@ sys.stdin = open('4881_sample_input.txt', 'r')
 def backtrack(k, start):
     global result
     if k == len(arr):
-        print(choice)
-        result.append(choice)
+        # print(choice)
+        # result.append(choice)
+        result.append(choice[:])
+        return
 
     else:
         for idx in range(k, len(arr)):
