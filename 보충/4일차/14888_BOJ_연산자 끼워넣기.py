@@ -2,14 +2,11 @@ import sys
 sys.stdin = open('14888_BOJ_input.txt', 'r')
 
 def backtrack(pl, mi, mu, di, k, cal):
-    global nums
-
     if len(nums) == k:
         result.append(cal)
         return
 
     if pl > 0:
-        # cal += nums[k] <---- cal 값이변경되서 뒤쪽에 영향을 줌.
         backtrack(pl-1, mi, mu, di, k+1, cal + nums[k])
 
     if mi > 0:
@@ -26,6 +23,7 @@ def backtrack(pl, mi, mu, di, k, cal):
             tmp = cal // nums[k]
 
         backtrack(pl, mi, mu, di-1, k+1, tmp)
+
 T = int(input())
 for t in range(T):
     N = int(input())
