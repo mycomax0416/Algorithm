@@ -9,32 +9,23 @@ def backtrack(pl, mi, mu, di, k, cal):
         return
 
     if pl > 0:
-        cal += nums[k]
-        print(pl, mi, mu, di, k, cal)
-        backtrack(pl-1, mi, mu, di, k+1, cal)
+        # cal += nums[k] <---- cal 값이변경되서 뒤쪽에 영향을 줌.
+        backtrack(pl-1, mi, mu, di, k+1, cal + nums[k])
 
     if mi > 0:
-        cal -= nums[k]
-        print(pl, mi, mu, di, k, cal)
-        backtrack(pl, mi-1, mu, di, k+1, cal)
+        backtrack(pl, mi-1, mu, di, k+1, cal - nums[k])
 
     if mu > 0:
-        cal *= nums[k]
-        print(pl, mi, mu, di, k, cal)
-        backtrack(pl, mi, mu-1, di, k+1, cal)
+        backtrack(pl, mi, mu-1, di, k+1, cal * nums[k])
 
     if di > 0:
-        # if nums[k] < 0:
-        #     cal //= (-nums[k])
-        #     cal = -cal
-        #
-        # else:
-        #     cal //= nums[k]
-        cal //= nums[k]
+        tmp = 0
+        if cal < 0:
+            tmp = -((-cal)//nums[k])
+        else:
+            tmp = cal // nums[k]
 
-        print(pl, mi, mu, di, k, cal)
-        backtrack(pl, mi, mu, di-1, k+1, cal)
-
+        backtrack(pl, mi, mu, di-1, k+1, tmp)
 T = int(input())
 for t in range(T):
     N = int(input())
@@ -46,7 +37,5 @@ for t in range(T):
 
     backtrack(pl, mi, mu, di, 0, cal)
 
-    print(min(result))
     print(max(result))
-    print('-----')
-
+    print(min(result))
