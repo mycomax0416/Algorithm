@@ -1,6 +1,4 @@
-import sys, copy
-sys.stdin = open('15683_BOJ_input.txt', 'r')
-
+import copy
 
 #       동 서 남 북
 dx_1 = [[1], [-1], [0], [0]]
@@ -168,62 +166,60 @@ def backtrack(k):
                 backtrack(k+1)
 
 
-T = int(input())
-for t in range(T):
-    N, M = map(int, input().split())    # N : 세로, M : 가로
-    # print(N, M)
+N, M = map(int, input().split())    # N : 세로, M : 가로
+# print(N, M)
 
-    arr = [list(map(int, input().split())) for _ in range(N)]
-    # print(arr)
+arr = [list(map(int, input().split())) for _ in range(N)]
+# print(arr)
 
-    cameras = []
-    find()  
-    # print(cameras)    # 카메라 정보가 호출 프린트 됨  
-                        # 종보는 카메라 위치, 카메라 번호
+cameras = []
+find()  
+# print(cameras)    # 카메라 정보가 호출 프린트 됨  
+                    # 종보는 카메라 위치, 카메라 번호
 
-    choice = [[]] * len(cameras)
-    perms = []
-    backtrack(0) # 순열 조합
-    # print(perms)  # 중복을 포함해서 가능한 순열이 프린트 됨
+choice = [[]] * len(cameras)
+perms = []
+backtrack(0) # 순열 조합
+# print(perms)  # 중복을 포함해서 가능한 순열이 프린트 됨
 
-    test = []   # 실행 하기위한 정보들을 모아서 test에 각각 리스트형식으로 담음
+test = []   # 실행 하기위한 정보들을 모아서 test에 각각 리스트형식으로 담음
 
-    blind_spot = N * M
+blind_spot = N * M
 
-    for try_filter in perms:
-        test_arr = copy.deepcopy(arr)
-        try_commend = []
+for try_filter in perms:
+    test_arr = copy.deepcopy(arr)
+    try_commend = []
 
-        for try_idx in range(len(try_filter)):
-            commend = copy.deepcopy(cameras[try_idx])
-            commend.append(try_filter[try_idx])
-            try_commend.append(commend)
-        # print(try_commend)
+    for try_idx in range(len(try_filter)):
+        commend = copy.deepcopy(cameras[try_idx])
+        commend.append(try_filter[try_idx])
+        try_commend.append(commend)
+    # print(try_commend)
 
-        for test in try_commend:
-            if test[2] == 1:
-                cctv_1(test[0], test[1], test[3])
+    for test in try_commend:
+        if test[2] == 1:
+            cctv_1(test[0], test[1], test[3])
 
-            elif test[2] == 2:
-                cctv_2(test[0], test[1], test[3])
-            
-            elif test[2] == 3:
-                cctv_3(test[0], test[1], test[3])
-            
-            elif test[2] == 4:
-                cctv_4(test[0], test[1], test[3])
-            
-            elif test[2] == 5:
-                cctv_5(test[0], test[1], test[3])
-
-        # print(test_arr)
-        test_spot = 0
-        for y in range(N):
-            for x in range(M):
-                if test_arr[y][x] == 0:
-                    test_spot += 1
+        elif test[2] == 2:
+            cctv_2(test[0], test[1], test[3])
         
-        if test_spot < blind_spot:
-            blind_spot = test_spot
+        elif test[2] == 3:
+            cctv_3(test[0], test[1], test[3])
+        
+        elif test[2] == 4:
+            cctv_4(test[0], test[1], test[3])
+        
+        elif test[2] == 5:
+            cctv_5(test[0], test[1], test[3])
 
-    print(blind_spot)
+    # print(test_arr)
+    test_spot = 0
+    for y in range(N):
+        for x in range(M):
+            if test_arr[y][x] == 0:
+                test_spot += 1
+    
+    if test_spot < blind_spot:
+        blind_spot = test_spot
+
+print(blind_spot)

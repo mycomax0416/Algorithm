@@ -20,9 +20,9 @@ def backtrack(start, pay):
 
 T = int(input())
 for t in range(T):
-    N = int(input())
     Ti = []
     Pi = []
+    N = int(input())
 
     for n in range(N):
         t, p = map(int, input().split())
@@ -31,6 +31,6 @@ for t in range(T):
 
     money = 0
     result = []
-    
+
     backtrack(0, 0)
     print(money)
