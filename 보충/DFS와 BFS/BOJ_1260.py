@@ -1,83 +1,85 @@
 import sys
 sys.stdin = open('BOJ_1260_input.txt', 'r')
-from collections import deque
+
+
+def DFS(start):
+    stack = []
+    visit = [False for _ in range(N)]
+    visit.insert(0, True)
+    
+    stack.append(start)
+    DFS_result.append(start)
+    visit[start] = True
+
+    while stack:
+        node = stack[-1]
+        pre_node = node
+
+        for w in G[node]:
+            if visit[w] == False:
+                stack.append(w)
+                DFS_result.append(w)
+                visit[w] = True
+                node = w
+                break
+
+        if node == pre_node:
+            stack.pop()
+    
+    return
+
+
+def BFS(start):
+    Q = []
+    visit = [False for _ in range(N)]
+    visit.insert(0, True)
+
+    Q.append(start)
+    BFS_result.append(start)
+    visit[start] = True
+
+    while Q:
+        node = Q.pop(0)
+
+        for w in G[node]:
+            if visit[w] == False:
+                Q.append(w)
+                BFS_result.append(w)
+                visit[w] = True
+        
+    return
 
 T = int(input())
 for a in range(T):
     N, M, V = (map(int, input().split()))
     
-    # print(N, M, V)
-    
-    old_G = [[] for _ in range(N+1)]
-    visit = [False for _ in range(N+1)]
+    G = [[] for _ in range(N+1)]
+    # print(G)
 
     for _ in range(M):
-        u, v = map(int, input().split())
-        old_G[u] += [v]
-        old_G[v] += [u]
-    
-    # print(old_G)
-#-----------------------
-    new_G = []
-    for tc in old_G:
-        if tc != []:
-            new_arr = []
-            for _ in range(len(tc)):
-                new_arr += [min(tc)]
-                tc.remove(min(tc))
-            new_G += [new_arr]
-        else:
-            new_G += [[]]
+        v, u = map(int, input().split())
+        # print(v, u)
+        G[v].append(u)
+        G[u].append(v)
+    # print(G)
 
-    # print(new_G)
-#-----------------------
-    BFS = []
-    v = V
-    stack = []
-    stack += [v]
-    visit[v] = True
-    BFS += [v]
+    for idx in G:
+        idx.sort()
+    # print(G)
 
-    while len(stack) > 0:
-        prev = v
-        for w in new_G[v]:
-            if not visit[w]:
-                stack += [w]
-                visit[w] = True
-                v = w
-                BFS += [v]
-                break
+    DFS_result = []
+    BFS_result = []
+    # DFS_output = []
+    # BFS_output = []
+
+    DFS(V)
+    BFS(V)
+    # print(DFS_result)
+    # print(BFS_result)
+
+    for _ in range(N):
+        DFS_result.append(str(DFS_result.pop(0)))
+        BFS_result.append(str(BFS_result.pop(0)))
         
-        if prev == v:
-            v = stack.pop()
-
-    # print(BFS)
-
-#--------------------------DFS
-    DFS = []
-    Q = deque()
-    visit = [False for _ in range(N+1)]
-    D = [0 for _ in range(N+1)]
-    P = [0 for _ in range(N+1)]
-
-    s = V
-    D[s] = 0
-    P[s] = s
-    visit[s] = True
-
-    DFS += [s]
-    Q += [s]
-    while Q:
-        v = Q.popleft()
-        for w in new_G[v]:
-            if not visit[w]:
-                visit[w] = True
-                DFS += [w]
-                D[w] = D[v] + 1
-                P[w] = v
-                Q.append(w)
-
-    # print(DFS)
-    
-    # print(' '.join(list(map(str, BFS))))
-    # print(' '.join(list(map(str, DFS))))
+    print(' '.join(DFS_result))
+    print(' '.join(BFS_result))
