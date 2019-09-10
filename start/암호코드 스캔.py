@@ -8,56 +8,57 @@ def find_code():
     top_y = 0
     bottom_y = 0
 
-    for y in range(N):
-        for x in range(M):
-            if input_arr[y][x] != '0':
-                left_x = x
-                top_y = y
-                break
-
-        if input_arr[y][x] != '0':
-                break
-
-    for y in range(top_y, N):
-        if input_arr[y][left_x] == '0':
-            bottom_y = y - 1
-            break
-
-
-    on = True
-    while on:
-        if right_x+1 >= M:
-            on = False
-        
-        else:
-            right_x += 1
-
-            for y in range(top_y, bottom_y):
-                if input_arr[y][right_x] != input_arr[y+1][right_x]:
-                    on = False
+    while input_arr != [['0'] * M for _ in range(N)]:
+        for y in range(N):
+            for x in range(M):
+                if input_arr[y][x] != '0':
+                    left_x = x
+                    top_y = y
                     break
 
-    #---------------------------
-    code_16 = list(input_arr[top_y][left_x:right_x])
+            if input_arr[y][x] != '0':
+                    break
+
+        for y in range(top_y, N):
+            if input_arr[y][left_x] == '0':
+                bottom_y = y - 1
+                break
 
 
-    while code_16[-1] == '0':
-        code_16.pop()
-        right_x -= 1
+        on = True
+        while on:
+            if right_x+1 >= M:
+                on = False
+            
+            else:
+                right_x += 1
 
-    # for _ in range(len(code_16)):
-    #     if code_16[-1] == '0':
-    #         code_16.pop()
-    #         right_x -= 1
-    #     else:
-    #         break
+                for y in range(top_y, bottom_y):
+                    if input_arr[y][right_x] != input_arr[y+1][right_x]:
+                        on = False
+                        break
 
-    codes_16.append(''.join(code_16))
-    #---------------------------------
+        #---------------------------
+        code_16 = list(input_arr[top_y][left_x:right_x])
 
-    for y in range(top_y, bottom_y+1):
-        for x in range(left_x, right_x+1):
-            input_arr[y][x] = '0'
+
+        # while code_16[-1] == '0':
+        #     code_16.pop()
+        #     right_x -= 1
+
+        for _ in range(len(code_16)):
+            if code_16[-1] == '0':
+                code_16.pop()
+                right_x -= 1
+            else:
+                break
+
+        codes_16.append(''.join(code_16))
+        #---------------------------------
+
+        for y in range(top_y, bottom_y+1):
+            for x in range(left_x, right_x+1):
+                input_arr[y][x] = '0'
 
     return
 
@@ -147,16 +148,16 @@ def interpret_code(code_16):
 
 
 T = int(input())
-for t in range(12):
+for t in range(13):
     N, M = map(int, input().split())
     input_arr = [list(input()) for _ in range(N)]
     result = 0
 
 
     codes_16 = []
-    while input_arr != [['0'] * M for _ in range(N)]:
-        find_code()
+    find_code()
     print(codes_16)
+    print('==========')
 
 
     # for code_16 in codes_16:
@@ -164,4 +165,3 @@ for t in range(12):
 
 
     # print('#{} {}'.format(t+1, result))
-    # print('==========')
