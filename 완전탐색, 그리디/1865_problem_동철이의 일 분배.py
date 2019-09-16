@@ -15,10 +15,7 @@ def comb(k):
     else:
         for i in range(N):
             if visit[i] == False:
-                if arr[k][i] == 0:
-                    return
-
-                else:
+                if arr[k][i] != 0:
                     cal *= arr[k][i]/100
                     visit[i] = True
 
@@ -40,4 +37,3 @@ for t in range(T):
     comb(0)
     
     print('#{}'.format(t+1), '%.6f' % max_problitiy)
-    
