@@ -11,6 +11,7 @@ for i in range(1 << 9):
     for j in range(9):
         if i & (1<<j):
             test += [arr[j]]
+            
     if len(test) == 7 and sum(test) == 100:
         test.sort()
         break
