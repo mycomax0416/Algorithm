@@ -2,35 +2,28 @@ import sys
 sys.stdin = open('1486_sample_input.txt', 'r')
 
 
-def backtrack():
-    if B <= sum(choice) < min_height:
-        min_height = sum(choice)
+def cal_height(idx, height):
+    global min_height
+
+    if height >= B:
+        min_height = min(min_height, height)
+        return
+
+    elif height >= min_height or idx >= N:
         return
 
     else:
-        
-
-
-
+        cal_height(idx+1, height)
+        cal_height(idx+1, height+Hi[idx])
 
 
 T = int(input())
-for t in range(1):
+for t in range(T):
     N, B = map(int, input().split())
     Hi = list(map(int, input().split()))
-    print(N, B)
-    print(Hi)
-    Hi.sort()
-    print(Hi)
 
-    min_height = 0
-    for i in Hi:
-        min_height += i
+    min_height = sum(Hi)
 
-        if min_height >= B:
-            break
+    cal_height(0, 0)
 
-    print(min_height)
-
-    choice = []
-    backtrack()
+    print('#{} {}'.format(t+1, min_height-B))

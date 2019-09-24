@@ -10,8 +10,6 @@ def move(k):
     global x, y, result, possibility
 
     if k >= action:
-        # print(visit)
-        # print(possibility)
         result += possibility
         visit[y][x] = False
         return
@@ -33,6 +31,7 @@ def move(k):
                         possibility /= E/100
                     else:
                         possibility *= 0
+                        return
                     
                 elif d == 1:
                     if W != 0:
@@ -41,6 +40,7 @@ def move(k):
                         possibility /= W/100
                     else:
                         possibility *= 0
+                        return
 
                 elif d == 2:
                     if S != 0:
@@ -49,6 +49,7 @@ def move(k):
                         possibility /= S/100
                     else:
                         possibility *= 0
+                        return
 
                 else:
                     if N != 0:
@@ -57,6 +58,7 @@ def move(k):
                         possibility /= N/100
                     else:
                         possibility *= 0
+                        return
 
                 visit[ny][nx] = False
                 x, y = pre_x, pre_y
