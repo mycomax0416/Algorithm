@@ -2,17 +2,6 @@
 # sys.stdin = open('16988_BOJ_input.txt', 'r')
 
 
-def combi():
-    for idx_1 in range(len(can_0)):
-        pick = []
-        pick.append(can_0[idx_1])
-        
-        for idx_2 in range(idx_1+1, len(can_0)):
-            pick.append(can_0[idx_2])
-            picks.append(pick[:])
-            pick.pop()
-
-
 # 동 서 남 북
 dx = [1, -1, 0, 0]
 dy = [0, 0, 1, -1]
@@ -32,29 +21,27 @@ def check():
                 flag = True
 
                 while Queue:
-                    point = Queue.pop(0)
-                    p_x, p_y = point[0], point[1]
+                    test = Queue.pop(0)
 
                     for d in range(4):
-                        nx = p_x + dx[d]
-                        ny = p_y + dy[d]
+                        nx = test[0] + dx[d]
+                        ny = test[1] + dy[d]
 
-                        if 0 <= nx < M and 0 <= ny < N and arr[ny][nx] == 0:
-                            flag = False
+                        if 0 <= nx < M and 0 <= ny < N:
+                            if arr[ny][nx] == 0:
+                                flag = False
 
-                        if 0 <= nx < M and 0 <= ny < N and arr[ny][nx] == 2 and visit[ny][nx] == False:
-                            Queue.append((nx, ny))
-                            visit[ny][nx] = True
-                            count += 1
+                            elif arr[ny][nx] == 2 and visit[ny][nx] == False:
+                                Queue.append((nx, ny))
+                                visit[ny][nx] = True
+                                count += 1
                         
                 if flag == False:
                     count = 0
-                    break
 
                 result += count
 
     max_result = max(max_result, result)
-
 
 
 # T = int(input())
@@ -71,7 +58,14 @@ for y in range(N):
             can_0.append((x, y))
 
 picks = []
-combi()
+for idx_1 in range(len(can_0)):
+    pick = []
+    pick.append(can_0[idx_1])
+    
+    for idx_2 in range(idx_1+1, len(can_0)):
+        pick.append(can_0[idx_2])
+        picks.append(pick[:])
+        pick.pop()
 
 for pick in picks:
     first = pick[0]
