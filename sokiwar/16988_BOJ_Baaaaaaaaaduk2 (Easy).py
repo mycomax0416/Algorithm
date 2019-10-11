@@ -1,6 +1,6 @@
 # import sys
 # sys.stdin = open('16988_BOJ_input.txt', 'r')
-
+from collections import deque
 
 # 동 서 남 북
 dx = [1, -1, 0, 0]
@@ -8,13 +8,15 @@ dy = [0, 0, 1, -1]
 
 def check():
     global max_result
-
+    
     visit = [[False]*M for _ in range(N)]
     result = 0
 
     for y in range(N):
         for x in range(M):
             if arr[y][x] == 2 and visit[y][x] == False:
+                # Queue = deque()
+                # Queue.append((x, y))
                 Queue = [(x, y)]
                 visit[y][x] = True
                 count = 1
@@ -22,6 +24,7 @@ def check():
 
                 while Queue:
                     test = Queue.pop(0)
+                    # test = Queue.popleft()
 
                     for d in range(4):
                         nx = test[0] + dx[d]

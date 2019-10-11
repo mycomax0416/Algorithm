@@ -33,12 +33,12 @@ for i in range(N-1):
 
     else:       # 이미 자식이 한 개 있는 경우
         child[arr[i*2]][1] = arr[i*2+1]
-
 print(child)
-print("전위 순회 결과: ", end=" ")
-preorder(1)
-print()
-print(child)
+# print(child)
+# print("전위 순회 결과: ", end=" ")
+# preorder(1)
+# print()
+# print(child)
 
 # print("중위 순회 결과: ", end=" ")
 # inorder(1)
