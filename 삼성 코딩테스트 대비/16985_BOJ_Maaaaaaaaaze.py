@@ -3,7 +3,6 @@ from pprint import pprint
 sys.stdin = open('16985_BOJ_input.txt', 'r')
 
  
- 
 empty = [[0]*5 for _ in range(5)]
 
 def spin(k):
