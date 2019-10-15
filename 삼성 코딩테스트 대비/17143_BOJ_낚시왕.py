@@ -41,7 +41,7 @@ def move(x, y, s, d, z, k):
             else:
                 move(x+1, y, s, 3, z, k-1)
 
-        elif d == 4 and 0 <= x < C:
+        elif d == 4 and 0 <= x < C: # 왼쪽
             if x == 0:
                 move(x+1, y, s, 3, z, k-1)
             else:
