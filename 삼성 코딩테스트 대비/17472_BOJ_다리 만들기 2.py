@@ -33,55 +33,53 @@ def connect_island(input_x, input_y, island_num):
         if arr[input_y][x] != island_num:
             break
 
-        my = input_y
-        while my < N:
-            if arr[my][x] != 0 and arr[my][x] != island_num:
-                # print(x, input_y)
-                if arr[my][x] not in G[island_num]:
-                    G[island_num].append(arr[my][x])
-                    G[arr[my][x]].append(island_num)
+        my_1, my_2 = input_y, input_y
+        while my_1 < N:
+            if arr[my_1][x] != 0 and arr[my_1][x] != island_num:
+                if arr[my_1][x] not in G[island_num]:
+                    G[island_num].append(arr[my_1][x])
+                    G[arr[my_1][x]].append(island_num)
                 break
-            my += 1
+            my_1 += 1
 
-        while 0 <= my:
-            if arr[my][x] != 0 and arr[my][x] != island_num:
-                if arr[my][x] not in G[island_num]:
-                    G[island_num].append(arr[my][x])
-                    G[arr[my][x]].append(island_num)
+        while 0 <= my_2:
+            if arr[my_2][x] != 0 and arr[my_2][x] != island_num:
+                if arr[my_2][x] not in G[island_num]:
+                    G[island_num].append(arr[my_2][x])
+                    G[arr[my_2][x]].append(island_num)
                 break
-            my -= 1
+            my_2 -= 1
 
         x += 1
 
     while y < N:
         if arr[y][input_x] != island_num:
             break
-
-        mx = input_x
-        while mx < M:
-            if arr[y][mx] != 0 and arr[y][mx] != island_num:
-                if arr[y][mx] not in G[island_num]:
-                    G[island_num].append(arr[y][mx])
-                    G[arr[y][mx]].append(island_num)
+        
+        mx_1, mx_2 = input_x, input_x
+        while mx_1 < M:
+            if arr[y][mx_1] != 0 and arr[y][mx_1] != island_num:
+                if arr[y][mx_1] not in G[island_num]:
+                    G[island_num].append(arr[y][mx_1])
+                    G[arr[y][mx_1]].append(island_num)
                 break
-            mx += 1
+            mx_1 += 1
             
-        while 0 <= mx:
-            if arr[y][mx] != 0 and arr[y][mx] != island_num:
-                if arr[y][mx] not in G[island_num]:
-                    G[island_num].append(arr[y][mx])
-                    G[arr[y][mx]].append(island_num)
+        while 0 <= mx_2:
+            if arr[y][mx_2] != 0 and arr[y][mx_2] != island_num:
+                if arr[y][mx_2] not in G[island_num]:
+                    G[island_num].append(arr[y][mx_2])
+                    G[arr[y][mx_2]].append(island_num)
                 break
-            mx -= 1
+            mx_2 -= 1
         
         y += 1
 
 
 T = int(input())
-for t in range(1):
+for t in range(T):
     N, M = map(int, input().split())
     arr = [list(map(int, input().split())) for _ in range(N)]
-    # pprint(arr)
 
     islands = []
     island_num = 1
@@ -93,9 +91,10 @@ for t in range(1):
                 islands.append((x, y, island_num))
 
     G = [[] for _ in range(island_num+1)]
-    # print(G)
     pprint(arr)
-    # print(islands)
 
-    connect_island(6, 0, 2)
+    for island in islands:
+        x, y, num = island
+        connect_island(x, y, num)
+
     print(G)
