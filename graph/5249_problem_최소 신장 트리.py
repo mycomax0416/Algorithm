@@ -33,5 +33,6 @@ for t in range(T):
                 key[v] = w
 
         count -= 1
-
-    print('#{} {}'.format(t+1, result))
+    print(G)
+    print(key)
+    # print('#{} {}'.format(t+1, result))

@@ -10,7 +10,6 @@ for t in range(T):
     for _ in range(E):
         u, v, w = map(int, input().split())
         G[u].append((v, w))
-        # G[v].append((u, w))
 
     D = [11*N for _ in range(N+1)]
     D[0] = 0
