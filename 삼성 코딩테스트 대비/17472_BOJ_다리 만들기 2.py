@@ -1,5 +1,5 @@
-# import sys
-# sys.stdin = open('17472_BOJ_input.txt', 'r')
+import sys
+sys.stdin = open('17472_BOJ_input.txt', 'r')
 from collections import deque
 from pprint import pprint
 
@@ -28,7 +28,6 @@ def island_numbering(input_x, input_y):
 
     
 def connect_island(input_x, input_y, island_num):
-    # x, y = input_x, input_y
     queue = deque()
     queue.append((input_x, input_y))
     visit = [[False]*M for _ in range(N)]
@@ -36,10 +35,8 @@ def connect_island(input_x, input_y, island_num):
 
     while queue:
         x, y = queue.popleft()
-        # print(x, y)
 
         mx_1 = x-1
-        # print(mx_1)
         if 0 < mx_1 and arr[y][mx_1] == 0:
             while arr[y][mx_1] == 0 and mx_1 > 0:
                 mx_1 -= 1
@@ -49,7 +46,6 @@ def connect_island(input_x, input_y, island_num):
                     G[arr[y][mx_1]].append((island_num, x-mx_1-1))
         mx_2 = x+1
         if mx_2 < M-2 and arr[y][mx_2] == 0:
-            # print(mx_2)
             while arr[y][mx_2] == 0 and mx_2 < M-1:
                 mx_2 += 1
             if arr[y][mx_2] != 0 and arr[y][mx_2] != island_num:
@@ -83,57 +79,52 @@ def connect_island(input_x, input_y, island_num):
                 visit[ny][nx] = True
 
 
-# T = int(input())
-# for t in range(T):
-N, M = map(int, input().split())
-arr = [list(map(int, input().split())) for _ in range(N)]
+T = int(input())
+for t in range(T):
+    N, M = map(int, input().split())
+    arr = [list(map(int, input().split())) for _ in range(N)]
 
-islands = []
-island_num = 1
-for y in range(N):
-    for x in range(M):
-        if arr[y][x] == 1:
-            island_num += 1
-            island_numbering(x, y)
-            islands.append((x, y, island_num))
+    islands = []
+    island_num = 1
+    for y in range(N):
+        for x in range(M):
+            if arr[y][x] == 1:
+                island_num += 1
+                island_numbering(x, y)
+                islands.append((x, y, island_num))
 
-G = [[] for _ in range(island_num+1)]
-# pprint(arr)
+    G = [[] for _ in range(island_num+1)]
+    for island in islands:
+        x, y, num = island
+        connect_island(x, y, num)
+        
+    pprint(arr)
+    print(G)
 
-for island in islands:
-    x, y, num = island
-    connect_island(x, y, num)
-# print(G)
+    key = [10 for _ in range(island_num+1)]
+    key[0], key[1], key[2] = 0, 0, 0
 
-# print(len(islands))
-key = [10 for _ in range(island_num+1)]
-key[0], key[1], key[2] = 0, 0, 0
-# print(key)
+    count = len(islands)
+    visit = [False for _ in range(island_num+1)]
+    visit[0], visit[1] = True, True
+    result = 0
 
-# print(len(islands), island_num+1)
-count = len(islands)
-visit = [False for _ in range(island_num+1)]
-visit[0], visit[1] = True, True
-result = 0
-# print(count)
+    while count:
+        min_len = 10
+        for idx in range(2, island_num+1):
+            if not  visit[idx] and min_len > key[idx]:
+                u, min_len = idx, key[idx]
 
-while count:
-    min_len = 10
-    for idx in range(2, island_num+1):
-        if not  visit[idx] and min_len > key[idx]:
-            u, min_len = idx, key[idx]
+        visit[u] = True
+        result += key[u]
 
-    visit[u] = True
-    result += key[u]
-    # print(u, key[u])
+        for v, w in G[u]:
+            if not visit[v] and w < key[v]:
+                key[v] = w
 
-    for v, w in G[u]:
-        if not visit[v] and w < key[v]:
-            key[v] = w
+        count -= 1
 
-    count -= 1
+    if result == 0:
+        result = -1
 
-if result == 0:
-    result = -1
-
-print(result)
+    print(result)
